@@ -1,7 +1,7 @@
 import * as RxDB from '../../../';
 
-RxDB.plugin(require('pouchdb-adapter-idb'));
-RxDB.plugin(require('pouchdb-adapter-http')); //enable syncing over http
+RxDB.addRxPlugin(require('pouchdb-adapter-idb'));
+RxDB.addRxPlugin(require('pouchdb-adapter-http')); //enable syncing over http
 
 const collections = [
     {
@@ -23,7 +23,8 @@ let dbPromise = null;
 
 const _create = async () => {
     console.log('DatabaseService: creating database..');
-    const db = await RxDB.create({name: 'heroesreactdb', adapter: 'idb', password: 'myLongAndStupidPassword'});
+    //const db = await RxDB.create({name: 'heroesreactdb', adapter: 'idb', password: 'myLongAndStupidPassword'});
+    const db = await RxDB.createRxDatabase({name: 'heroesreactdb', adapter: 'idb', password: 'myLongAndStupidPassword'});
     console.log('DatabaseService: created database');
     window['db'] = db; // write to window for debugging
 
